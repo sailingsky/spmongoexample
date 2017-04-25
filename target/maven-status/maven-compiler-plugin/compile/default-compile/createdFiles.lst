@@ -1,0 +1,6 @@
+com\beck\repository\DepartureRepository.class
+com\beck\service\DepartureService.class
+com\beck\controller\DepartureController.class
+Launcher.class
+com\beck\pojo\Departure.class
+com\beck\service\impl\DepartureServiceImpl.class
