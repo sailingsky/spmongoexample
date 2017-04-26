@@ -1,6 +1,8 @@
 package com.beck.controller;
 
 import com.beck.pojo.Departure;
+import com.beck.service.DepartureService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,15 +19,17 @@ import java.util.List;
 @RequestMapping("/departure")
 public class DepartureController {
 
+    @Autowired
+    private DepartureService departureService;
+
     @RequestMapping("/list")
-//    @ResponseBody
     public List<Departure> list(){
-        Departure departure = new Departure();
-        departure.setBegintime(new Date());
-        departure.setDepartureno("11111");
-        departure.setTotalweight(11.3);
-        List<Departure> departureList = new ArrayList<Departure>();
-        departureList.add(departure);
-        return departureList;
+//        Departure departure = new Departure();
+//        departure.setBegintime(new Date());
+//        departure.setDepartureno("11111");
+//        departure.setTotalweight(11.3);
+//        List<Departure> departureList = new ArrayList<Departure>();
+//        departureList.add(departure);
+        return departureService.findDepartureList();
     }
 }
