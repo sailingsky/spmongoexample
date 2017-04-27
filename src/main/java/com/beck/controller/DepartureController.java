@@ -3,12 +3,14 @@ package com.beck.controller;
 import com.beck.pojo.Departure;
 import com.beck.service.DepartureService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,5 +33,19 @@ public class DepartureController {
 //        List<Departure> departureList = new ArrayList<Departure>();
 //        departureList.add(departure);
         return departureService.findDepartureList();
+    }
+
+    @RequestMapping("/page")
+    public Page<Departure> pageList() {
+        Pageable pageable = new PageRequest(2, 3);
+        return departureService.findListByPage(pageable);
+    }
+
+    @RequestMapping("/query")
+    public List<Departure> pageWithQuery(){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("begintime").lt(new Date()))
+                .with(new PageRequest(1,2));
+        return departureService.listDepartureByPageWithQuery(query);
     }
 }

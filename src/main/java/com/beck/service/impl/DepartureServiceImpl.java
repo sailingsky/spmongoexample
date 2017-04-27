@@ -4,6 +4,9 @@ import com.beck.pojo.Departure;
 import com.beck.repository.DepartureRepository;
 import com.beck.service.DepartureService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,5 +21,13 @@ public class DepartureServiceImpl implements DepartureService {
 
     public List<Departure> findDepartureList() {
         return departureRepository.findAll();
+    }
+
+    public Page<Departure> findListByPage(Pageable pageable) {
+        return departureRepository.findAll(pageable);
+    }
+
+    public List<Departure> listDepartureByPageWithQuery(Query query){
+        return departureRepository.listDepartureByPageWithQuery(query);
     }
 }
